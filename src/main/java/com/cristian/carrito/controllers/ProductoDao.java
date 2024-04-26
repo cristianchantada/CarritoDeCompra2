@@ -35,10 +35,14 @@ public class ProductoDao implements DaoInterface<Producto> {
 			System.out.println("Fail to initialize Oracle JDBC driver in ClienteDao: " + e.toString());
 		}
 
-		user = "root";
+		/*user = "root";
 		password = "0000";
-		url = "jdbc:mysql://localhost:3306/partes";
+		url = "jdbc:mysql://localhost:3306/partes";*/
 
+		user = "cristian";
+		password = "crstn";
+		url = "jdbc:mysql://10.53.124.177:3306/partes";
+		
 		// connect
 		conn = null;
 		try {

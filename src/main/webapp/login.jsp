@@ -10,12 +10,13 @@
 <%@ page import="java.io.IOException"%>
 <%@page import="javax.swing.SwingConstants"%>
 <%@page import="javax.swing.JOptionPane"%>
+<%@page import="jakarta.servlet.http.Cookie"%>
 <html>
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <link rel="stylesheet" href="styles/style.css">
-<title>Login partes</title>
+<title>Login</title>
 </head>
 <body>
 
@@ -53,9 +54,14 @@
 			showLimitAccess = true;
 			accessCounter = 5;
 		} else if (password.equals(cliente.getPassword())) {			
-			
+						
 			session.setAttribute("login", "true");
+			session.setMaxInactiveInterval(120);
 			
+			
+			Cookie cookie = new Cookie("userEmail", cliente.getEmail()); 
+			cookie.setMaxAge(120);
+			response.addCookie(cookie);
 			response.sendRedirect("index.jsp");			
 			// Siempre que entremos correctamente a la web, el contador de accesos se setea a cero
 			accessCounter = 0;

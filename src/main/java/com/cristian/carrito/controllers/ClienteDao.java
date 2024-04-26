@@ -32,9 +32,13 @@ public class ClienteDao implements DaoInterface<Cliente> {
 			System.out.println("Fail to initialize Oracle JDBC driver in ClienteDao: " + e.toString());
 		}
 
-		user = "root";
+		/*user = "root";
 		password = "0000";
-		url = "jdbc:mysql://localhost:3306/partes";
+		url = "jdbc:mysql://localhost:3306/partes";*/
+		
+		user = "cristian";
+		password = "crstn";
+		url = "jdbc:mysql://10.53.124.177:3306/partes";
 
 		// connect
 		conn = null;
@@ -113,6 +117,8 @@ public class ClienteDao implements DaoInterface<Cliente> {
 						, rs.getString("telefono")
 						, rs.getString("password")
 						, rs.getInt("accessCounter"));
+				
+				newClient.setEmail(rs.getString("email"));
 
 				if(rs.getTime("accessTime") != null) {
 					newClient.setAccessTime(rs.getTime("accessTime").toLocalTime());
@@ -120,10 +126,10 @@ public class ClienteDao implements DaoInterface<Cliente> {
 					newClient.setAccessTime(LocalTime.now());
 				}				
 			} else {
-				System.out.println("No se encontró ningún empleado con el NIF proporcionado.");
+				System.out.println("No se encontró ningún empleado con el email proporcionado.");
 			}
 		} catch (SQLException e) {
-			System.out.println("Error al intentar obtener el cliente por su id en Cliente.Dao: " + e.getMessage());
+			System.out.println("Error al intentar obtener el cliente por su email en Cliente.Dao: " + e.getMessage());
 			e.printStackTrace();
 		} finally {
 			closeConnection();

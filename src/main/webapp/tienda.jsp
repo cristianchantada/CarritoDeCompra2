@@ -17,8 +17,6 @@
 		<%
 		List<Producto> listaProductos = (List<Producto>) request.getAttribute("listaProductos");
 
-		System.out.println("productsPerPage tienda.jsp: " + request.getAttribute("productsPerPage"));
-		
 		int productsPerPage = (int) request.getAttribute("productsPerPage");
 		int lastProductPage = (int) request.getAttribute("theLastProduct");
 		int firstProductPage = (int) request.getAttribute("theFirstProduct");

@@ -3,9 +3,13 @@ package com.cristian.carrito.servlets;
 import java.io.IOException;
 import java.sql.SQLException;
 
+import com.cristian.carrito.controllers.ClienteDao;
 import com.cristian.carrito.models.Carrito;
+import com.cristian.carrito.models.Cliente;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -21,18 +25,33 @@ public class comprarServlet extends HttpServlet {
 		req.setAttribute("theFirstProduct", req.getParameter("theFirstProduct"));
 		req.setAttribute("theLastProduct", req.getParameter("theLastProduct"));
 
-		System.out.println("codigo= " + req.getParameter("codigo"));
-		System.out.println("ProductsPerPage =" + req.getParameter("ProductsPerPage"));
 		int codigo = Integer.parseInt(req.getParameter("codigo"));
 		
 		HttpSession session = req.getSession();
 			
 		Carrito carrito = (Carrito) session.getAttribute("carrito");
+		
+	       Cookie[] cookies = req.getCookies();
+
+	        if (cookies != null) {
+	            for (Cookie cookie : cookies) {
+	                if (cookie.getName().equals("carrito")) {          	
+
+	                	
+	                	
+	                }
+	            }
+	        }
+		
+		
+		
 		try {
 			carrito.meterProducto(codigo);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
+		
 		session.setAttribute("carrito", carrito);
 		
 		getServletContext().getRequestDispatcher("/index.jsp").forward(req, resp);

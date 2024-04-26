@@ -25,7 +25,7 @@ public class MasiveInsertServlet extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		System.out.println("Aquí entra");
+
 		String productosStr = (String) req.getParameter("products");
 		
 		  List<Producto> listaProductos = new ArrayList<>();
